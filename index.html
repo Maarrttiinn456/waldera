@@ -1,70 +1,74 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="cs" class="scroll-smooth">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Waldera</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Waldera</title>
 
-  <!-- Tailwind v4 (compiled) -->
-  <link rel="stylesheet" href="css/output.css" />
+        <!-- Tailwind v4 (compiled) -->
+        <link rel="stylesheet" href="css/output.css" />
 
-  <!-- AOS -->
-  <link rel="stylesheet" href="css/aos.css" />
-</head>
-<body class="bg-white text-gray-900 antialiased">
+        <!-- AOS -->
+        <link rel="stylesheet" href="css/aos.css" />
+    </head>
+    <body>
+        <!-- Header -->
+        <header class="bg-industry-navy">
+            <div class="container">
+                <div class="flex justify-between items-center py-4">
+                    <div>
+                        <img class="w-48" src="./assets/logo/Weldera_logo_black.svg" alt="" />
+                    </div>
+                    <div class="hidden md:flex items-center gap-8">
+                        <a href="#sluzby" class="nav-link">Služby</a>
+                        <a href="#o-nas" class="nav-link">O nás</a>
+                        <a href="#projekty" class="nav-link">Projekty</a>
+                        <a href="#kariera" class="nav-link">Kariéra</a>
+                        <a href="#kontakt" class="btn-primary">Kontakt</a>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-  <!-- Příklad sekce s Alpine.js a AOS -->
-  <section
-    x-data="{ open: false }"
-    class="min-h-screen flex flex-col items-center justify-center gap-6 p-8"
-  >
-    <h1
-      data-aos="fade-down"
-    >
-      Waldera
-    </h1>
+        <!-- Hero -->
+        <section class="bg-industry-navy">
+            <div class="container py-20">
+                <div class="grid grid-cols-2">
+                    <div class="self-center">
+                        <h1 class="text-white">
+                            Svařujeme <span class="text-tech-lila">budoucnost</span> <br />
+                            z oceli.
+                        </h1>
+                        <p class="text-white/60 max-w-md my-6">
+                            Weldera je česká strojírenská firma specializující se na laserové
+                            řezání, přesné ohýbání a certifikované svařování ocelových konstrukcí.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="#kontakt" class="btn-primary block">Naše služby</a>
+                            <a href="#kontakt" class="btn-outline block">Kontaktujte nás</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img
+                            class="aspect-square object-cover"
+                            src="./assets/images/DSC_4644.jpg"
+                            alt=""
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- AOS init -->
+        <script src="js/aos.js"></script>
+        <script>
+            AOS.init({
+                duration: 700,
+                once: true,
+            });
+        </script>
 
-    <p>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et ducimus quis, eum dignissimos itaque voluptates rerum consequatur. Odio dolore ratione eligendi ex delectus nostrum aliquid, saepe voluptatum totam praesentium nisi!
-    </p>
-
-    <p
-      class="text-lg text-gray-600 max-w-md text-center"
-      data-aos="fade-up"
-      data-aos-delay="100"
-    >
-      Tailwind v4 · Alpine.js · AOS
-    </p>
-
-    <button
-      @click="open = !open"
-      class="px-6 py-3 bg-black text-white rounded-xl hover:bg-gray-800 transition"
-      data-aos="zoom-in"
-      data-aos-delay="200"
-    >
-      Toggle
-    </button>
-
-    <div
-      x-show="open"
-      x-transition
-      class="mt-4 p-6 bg-gray-100 rounded-2xl text-gray-700"
-    >
-      Alpine.js funguje!
-    </div>
-  </section>
-
-  <!-- AOS init -->
-  <script src="js/aos.js"></script>
-  <script>
-    AOS.init({
-      duration: 700,
-      once: true,
-    });
-  </script>
-
-  <!-- Alpine.js (musí být poslední) -->
-  <script defer src="js/alpine.min.js"></script>
-</body>
+        <!-- Alpine.js (musí být poslední) -->
+        <script defer src="js/alpine.min.js"></script>
+    </body>
 </html>
