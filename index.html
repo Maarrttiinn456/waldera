@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="cs" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Waldera</title>
+
+  <!-- Tailwind v4 (compiled) -->
+  <link rel="stylesheet" href="css/output.css" />
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="css/aos.css" />
+</head>
+<body class="bg-white text-gray-900 antialiased">
+
+  <!-- Příklad sekce s Alpine.js a AOS -->
+  <section
+    x-data="{ open: false }"
+    class="min-h-screen flex flex-col items-center justify-center gap-6 p-8"
+  >
+    <h1
+      class="text-4xl font-bold"
+      data-aos="fade-down"
+    >
+      Waldera
+    </h1>
+
+    <p
+      class="text-lg text-gray-600 max-w-md text-center"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      Tailwind v4 · Alpine.js · AOS
+    </p>
+
+    <button
+      @click="open = !open"
+      class="px-6 py-3 bg-black text-white rounded-xl hover:bg-gray-800 transition"
+      data-aos="zoom-in"
+      data-aos-delay="200"
+    >
+      Toggle
+    </button>
+
+    <div
+      x-show="open"
+      x-transition
+      class="mt-4 p-6 bg-gray-100 rounded-2xl text-gray-700"
+    >
+      Alpine.js funguje!
+    </div>
+  </section>
+
+  <!-- AOS init -->
+  <script src="js/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 700,
+      once: true,
+    });
+  </script>
+
+  <!-- Alpine.js (musí být poslední) -->
+  <script defer src="js/alpine.min.js"></script>
+</body>
+</html>
