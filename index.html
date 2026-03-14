@@ -3,70 +3,980 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Waldera</title>
+        <title>Weldera — Laserové řezání, svařování a ocelové konstrukce</title>
+        <meta
+            name="description"
+            content="Weldera (B-M-BETA s.r.o.) — česká strojírenská firma s více než 25 lety zkušeností. Laserové řezání, ohýbání plechů, certifikované svařování a výroba ocelových konstrukcí na míru. Dobřív, Roudnice nad Labem."
+        />
+        <meta
+            name="keywords"
+            content="laserové řezání, svařování, ohýbání plechů, ocelové konstrukce, zámečnická výroba, MIG MAG TIG, CNC ohýbání, strojírenství, Weldera, B-M-BETA, Roudnice nad Labem"
+        />
+        <meta name="author" content="Weldera — B-M-BETA s.r.o." />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://www.weldera.cz/" />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.weldera.cz/" />
+        <meta property="og:site_name" content="Weldera" />
+        <meta
+            property="og:title"
+            content="Weldera — Laserové řezání, svařování a ocelové konstrukce"
+        />
+        <meta
+            property="og:description"
+            content="Česká strojírenská firma s více než 25 lety zkušeností. Laserové řezání, ohýbání plechů, certifikované svařování a výroba ocelových konstrukcí na míru."
+        />
+        <meta property="og:image" content="https://www.weldera.cz/assets/images/DSC_4808.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Weldera — výroba ocelových konstrukcí" />
+        <meta property="og:locale" content="cs_CZ" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="Weldera — Laserové řezání, svařování a ocelové konstrukce"
+        />
+        <meta
+            name="twitter:description"
+            content="Česká strojírenská firma s více než 25 lety zkušeností. Laserové řezání, ohýbání plechů, certifikované svařování a výroba ocelových konstrukcí na míru."
+        />
+        <meta name="twitter:image" content="https://www.weldera.cz/assets/images/DSC_4808.jpg" />
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
+        <link rel="manifest" href="assets/favicon/site.webmanifest" />
+
+        <!-- Další -->
+        <meta name="theme-color" content="#171649" />
+        <meta name="geo.region" content="CZ" />
+        <meta name="geo.placename" content="Roudnice nad Labem" />
 
         <!-- Tailwind v4 (compiled) -->
         <link rel="stylesheet" href="css/output.css" />
 
         <!-- AOS -->
         <link rel="stylesheet" href="css/aos.css" />
+
+        <!-- Swiper -->
+        <link rel="stylesheet" href="css/swiper.css" />
     </head>
-    <body>
-        <!-- Header -->
-        <header class="bg-industry-navy">
-            <div class="container">
-                <div class="flex justify-between items-center py-4">
-                    <div>
-                        <img class="w-48" src="./assets/logo/Weldera_logo_black.svg" alt="" />
-                    </div>
-                    <div class="hidden md:flex items-center gap-8">
-                        <a href="#sluzby" class="nav-link">Služby</a>
-                        <a href="#o-nas" class="nav-link">O nás</a>
-                        <a href="#projekty" class="nav-link">Projekty</a>
-                        <a href="#kariera" class="nav-link">Kariéra</a>
-                        <a href="#kontakt" class="btn-primary">Kontakt</a>
+    <body class="overflow-x-hidden">
+        <!-- Header wrapper — sdílený Alpine stav pro header + mobilní menu -->
+        <div
+            x-data="{
+                open: false,
+                hidden: false,
+                lastY: 0,
+                onScroll() {
+                    const y = window.scrollY;
+                    this.hidden = y > 80 && y > this.lastY;
+                    this.lastY = y;
+                }
+            }"
+            x-init="$watch('open', val => document.body.classList.toggle('overflow-hidden', val))"
+            @scroll.window="onScroll()"
+            @keydown.escape.window="open = false"
+        >
+            <!-- Header -->
+            <header
+                :class="hidden && !open ? '-translate-y-full' : 'translate-y-0'"
+                :style="open ? 'background-color: #000000' : 'background-color: rgba(23, 22, 73, 0.82)'"
+                class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/10 transition-all duration-300"
+            >
+                <div
+                    class="blob"
+                    style="
+                        width: 700px;
+                        height: 700px;
+                        top: -200px;
+                        right: -200px;
+                        background: rgba(181, 168, 227, 0.12);
+                    "
+                ></div>
+                <div class="container">
+                    <div class="flex justify-between items-center py-4">
+                        <a href="#hero">
+                            <img
+                                class="w-32 lg:w-48"
+                                src="./assets/logo/Weldera_short_logo_black.svg"
+                                alt=""
+                            />
+                        </a>
+
+                        <!-- Desktop nav -->
+                        <div class="hidden lg:flex items-center gap-8">
+                            <a href="#sluzby" class="nav-link">Služby</a>
+                            <a href="#o-nas" class="nav-link">O nás</a>
+                            <a href="#kariera" class="nav-link">Kariéra</a>
+                            <a href="#kontakt" class="btn-primary">Kontakt</a>
+                        </div>
+
+                        <!-- Hamburger button (mobile) -->
+                        <button
+                            @click="open = !open"
+                            class="lg:hidden relative w-8 h-8 flex flex-col items-center justify-center gap-1.5 text-white"
+                            aria-label="Otevřít menu"
+                        >
+                            <span
+                                class="block w-6 h-0.5 bg-current transition-all duration-300 origin-center"
+                                :class="open ? 'rotate-45 translate-y-2' : ''"
+                            ></span>
+                            <span
+                                class="block w-6 h-0.5 bg-current transition-all duration-300"
+                                :class="open ? 'opacity-0 scale-x-0' : ''"
+                            ></span>
+                            <span
+                                class="block w-6 h-0.5 bg-current transition-all duration-300 origin-center"
+                                :class="open ? '-rotate-45 -translate-y-2' : ''"
+                            ></span>
+                        </button>
                     </div>
                 </div>
+            </header>
+
+            <!-- Mobilní fullscreen menu -->
+            <div
+                x-show="open"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
+                class="lg:hidden fixed inset-0 z-[45] flex flex-col items-center justify-center gap-10 overflow-y-auto py-24"
+                style="background-color: #000000"
+            >
+                <a
+                    @click="open = false"
+                    href="#sluzby"
+                    class="text-3xl font-display font-bold text-white/80 hover:text-tech-lila transition-colors tracking-tight"
+                    >Služby</a
+                >
+                <a
+                    @click="open = false"
+                    href="#o-nas"
+                    class="text-3xl font-display font-bold text-white/80 hover:text-tech-lila transition-colors tracking-tight"
+                    >O nás</a
+                >
+
+                <a
+                    @click="open = false"
+                    href="#kariera"
+                    class="text-3xl font-display font-bold text-white/80 hover:text-tech-lila transition-colors tracking-tight"
+                    >Kariéra</a
+                >
+                <a @click="open = false" href="#kontakt" class="btn-primary mt-2">Kontakt</a>
             </div>
-        </header>
+        </div>
 
         <!-- Hero -->
-        <section class="bg-industry-navy">
-            <div class="container py-20">
-                <div class="grid grid-cols-2">
+        <section id="hero" class="bg-industry-navy overflow-hidden pt-[73px] relative">
+            <div
+                class="blob"
+                style="
+                    width: 700px;
+                    height: 700px;
+                    top: -200px;
+                    right: -200px;
+                    background: rgba(181, 168, 227, 0.12);
+                "
+            ></div>
+            <div
+                class="blob"
+                style="
+                    width: 700px;
+                    height: 700px;
+                    bottom: -200px;
+                    left: -200px;
+                    background: rgba(181, 168, 227, 0.12);
+                "
+            ></div>
+            <div class="container py-12 lg:py-20">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div class="self-center">
-                        <h1 class="text-white">
+                        <h1 class="text-white" data-aos="fade-in" data-aos-delay="0">
                             Svařujeme <span class="text-tech-lila">budoucnost</span> <br />
                             z oceli.
                         </h1>
-                        <p class="text-white/60 max-w-md my-6">
+                        <p
+                            class="text-white/60 max-w-md my-6 text-lg"
+                            data-aos="fade-in"
+                            data-aos-delay="200"
+                        >
                             Weldera je česká strojírenská firma specializující se na laserové
                             řezání, přesné ohýbání a certifikované svařování ocelových konstrukcí.
                         </p>
-                        <div class="flex gap-4">
-                            <a href="#kontakt" class="btn-primary block">Naše služby</a>
-                            <a href="#kontakt" class="btn-outline block">Kontaktujte nás</a>
+                        <div
+                            class="flex flex-col md:flex-row gap-4"
+                            data-aos="fade-in"
+                            data-aos-delay="400"
+                        >
+                            <a href="#sluzby" class="btn-primary block w-fit">Naše služby</a>
+                            <a href="#kontakt" class="btn-outline block w-fit">Kontaktujte nás</a>
                         </div>
                     </div>
-                    <div>
-                        <img
-                            class="aspect-square object-cover"
-                            src="./assets/images/DSC_4644.jpg"
-                            alt=""
-                        />
+                    <div data-aos="fade-in" data-aos-delay="0">
+                        <div class="swiper hero-swiper overflow-hidden">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img
+                                        class="aspect-video lg:aspect-[3/4] object-cover w-full max-h-[650px]"
+                                        src="./assets/images/DSC_4644.jpg"
+                                        alt="Ocelové konstrukce"
+                                        loading="eager"
+                                    />
+                                </div>
+                                <div class="swiper-slide">
+                                    <img
+                                        class="aspect-video lg:aspect-[3/4] object-cover w-full max-h-[650px]"
+                                        src="./assets/images/DSC_5060.jpg"
+                                        alt="Svařování oceli"
+                                        loading="lazy"
+                                    />
+                                </div>
+                                <div class="swiper-slide">
+                                    <img
+                                        class="aspect-video lg:aspect-[3/4] object-cover w-full max-h-[650px]"
+                                        src="./assets/images/DSC_5113.jpg"
+                                        alt="Svařování oceli"
+                                        loading="lazy"
+                                    />
+                                </div>
+                                <div class="swiper-slide">
+                                    <img
+                                        class="aspect-video lg:aspect-[3/4] object-cover w-full max-h-[650px]"
+                                        src="./assets/images/DSC_4874.jpg"
+                                        alt="Laserové řezání"
+                                        loading="lazy"
+                                    />
+                                </div>
+                            </div>
+                            <!-- klikatelné zóny pro navigaci -->
+                            <div
+                                class="hero-swiper-zone-prev"
+                                aria-label="Předchozí snímek"
+                                role="button"
+                            ></div>
+                            <div
+                                class="hero-swiper-zone-next"
+                                aria-label="Následující snímek"
+                                role="button"
+                            ></div>
+                            <!-- paginace -->
+                            <div class="swiper-pagination hero-swiper-pagination"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- ═══ NAŠE SLUŽBY ═══ -->
+        <section id="sluzby" class="py-12 lg:py-20 bg-industry-navy">
+            <div class="container">
+                <h2
+                    class="text-sm text-tech-lila uppercase mb-4"
+                    data-aos="fade-in"
+                    data-aos-delay="0"
+                >
+                    Co děláme
+                </h2>
+                <h3
+                    class="text-white font-bold leading-tight"
+                    data-aos="fade-in"
+                    data-aos-delay="200"
+                >
+                    Komplexní strojírenské <br />
+                    <span class="text-tech-lila">služby pod jednou střechou</span>
+                </h3>
+
+                <div class="mt-12">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                        <!-- Karta 1 -->
+                        <div class="service-card p-8" data-aos="fade-in" data-aos-delay="400">
+                            <div class="mb-4 text-tech-lila font-bold">01</div>
+                            <div
+                                class="w-12 h-12 mb-5 flex items-center justify-center rounded-sm bg-tech-lila/10"
+                            >
+                                <svg
+                                    class="w-6 h-6 text-tech-lila"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="1.5"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z"
+                                    />
+                                </svg>
+                            </div>
+                            <h4 class="font-bold text-xl text-white mb-3">Laserové řezání</h4>
+                            <p class="text-sm leading-relaxed text-white/60">
+                                Přesné laserové řezání plechů a profilů. Zvládáme komplexní tvary i
+                                sériovou výrobu dle výkresové dokumentace.
+                            </p>
+                        </div>
+                        <!-- Karta 2 -->
+                        <div class="service-card p-8" data-aos="fade-in" data-aos-delay="450">
+                            <div class="mb-4 text-tech-lila font-bold">02</div>
+                            <div
+                                class="w-12 h-12 mb-5 flex items-center justify-center rounded-sm bg-tech-lila/10"
+                            >
+                                <svg
+                                    class="w-6 h-6 text-tech-lila"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="1.5"
+                                        d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
+                                    />
+                                </svg>
+                            </div>
+                            <h4 class="font-bold text-xl text-white mb-3">Ohýbání plechů</h4>
+                            <p class="text-sm leading-relaxed text-white/60">
+                                Moderní CNC ohýbačky zajistí přesné ohýbání dle tolerancí.
+                                Zpracování různých materiálů a tlouštěk.
+                            </p>
+                        </div>
+                        <!-- Karta 3 -->
+                        <div class="service-card p-8" data-aos="fade-in" data-aos-delay="500">
+                            <div class="mb-4 text-tech-lila font-bold">03</div>
+                            <div
+                                class="w-12 h-12 mb-5 flex items-center justify-center rounded-sm bg-tech-lila/10"
+                            >
+                                <svg
+                                    class="w-6 h-6 text-tech-lila"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="1.5"
+                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
+                                    />
+                                </svg>
+                            </div>
+                            <h4 class="font-bold text-xl text-white mb-3">Svařování</h4>
+                            <p class="text-sm leading-relaxed text-white/60">
+                                Certifikované svařování dle mezinárodních norem. MIG/MAG, TIG a
+                                bodové svařování pro všechny účely.
+                            </p>
+                        </div>
+                        <!-- Karta 4 -->
+                        <div class="service-card p-8" data-aos="fade-in" data-aos-delay="550">
+                            <div class="mb-4 text-tech-lila font-bold">04</div>
+                            <div
+                                class="w-12 h-12 mb-5 flex items-center justify-center rounded-sm bg-tech-lila/10"
+                            >
+                                <svg
+                                    class="w-6 h-6 text-tech-lila"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="1.5"
+                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                                    />
+                                </svg>
+                            </div>
+                            <h4 class="font-bold text-xl text-white mb-3">Ocelové konstrukce</h4>
+                            <p class="text-sm leading-relaxed text-white/60">
+                                Výroba ocelových a strojních konstrukcí, dopravníků, stavebních a
+                                železničních prvků na míru.
+                            </p>
+                        </div>
+                        <!-- Karta 5 -->
+                        <div class="service-card p-8" data-aos="fade-in" data-aos-delay="600">
+                            <div class="mb-4 text-tech-lila font-bold">05</div>
+                            <div
+                                class="w-12 h-12 mb-5 flex items-center justify-center rounded-sm bg-tech-lila/10"
+                            >
+                                <svg
+                                    class="w-6 h-6 text-tech-lila"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="1.5"
+                                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                                    />
+                                </svg>
+                            </div>
+                            <h4 class="font-bold text-xl text-white mb-3">Zámečnická výroba</h4>
+                            <p class="text-sm leading-relaxed text-white/60">
+                                Brány, mříže, schodiště, zábradlí i zakázkové kovové prvky pro
+                                interiér i exteriér.
+                            </p>
+                        </div>
+                        <!-- Karta 6 CTA -->
+                        <div
+                            class="p-8 flex flex-col justify-between rounded-sm bg-tech-lila/10 border border-tech-lila/30"
+                            data-aos="fade-in"
+                            data-aos-delay="600"
+                        >
+                            <div class="mb-4 text-tech-lila font-bold">06</div>
+                            <h4 class="font-bold text-xl text-white mb-3">
+                                Máte speciální požadavek?
+                            </h4>
+                            <p class="text-sm leading-relaxed mb-6 text-white/60">
+                                Rádi si promluvíme o vašem projektu. Nabízíme také poradenství a
+                                technické konzultace.
+                            </p>
+                            <a href="#kontakt" class="btn-primary self-start text-sm">
+                                Kontaktujte nás
+                                <svg
+                                    class="w-4 h-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                    />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ O NÁS ═══ -->
+        <section id="o-nas" class="relative py-12 lg:py-28 overflow-hidden bg-teal">
+            <div
+                class="blob"
+                style="
+                    width: 400px;
+                    height: 400px;
+                    top: 0;
+                    right: 0;
+                    background: rgba(181, 168, 227, 0.12);
+                "
+            ></div>
+            <div class="relative container">
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <img
+                        src="./assets/images/DSC_5035.jpg"
+                        alt="Výroba ve Weldera"
+                        class="w-full h-auto object-cover aspect-square"
+                        data-aos="fade-in"
+                        data-aos-delay="0"
+                        loading="lazy"
+                    />
+
+                    <div>
+                        <h2
+                            class="text-sm text-tech-lila uppercase mb-4"
+                            data-aos="fade-in"
+                            data-aos-delay="0"
+                        >
+                            O společnosti
+                        </h2>
+                        <h3
+                            class="text-white font-bold leading-tight"
+                            data-aos="fade-in"
+                            data-aos-delay="200"
+                        >
+                            Tradice a moderní <br />
+                            <span class="text-tech-lila">technologie</span>
+                        </h3>
+                        <p
+                            class="leading-relaxed my-4 text-white/60"
+                            data-aos="fade-in"
+                            data-aos-delay="400"
+                        >
+                            Weldera — dříve B.M.Beta — je česká strojírenská společnost s více než
+                            25 lety zkušeností. Zabýváme se kompletním procesem laserového řezání,
+                            ohýbání, svařování a výrobou ocelových konstrukcí.
+                        </p>
+                        <p
+                            class="leading-relaxed text-white/60"
+                            data-aos="fade-in"
+                            data-aos-delay="600"
+                        >
+                            Každý projekt bereme jako závazek ke kvalitě, ověřené certifikovanými
+                            postupy dle mezinárodních norem.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ KARIÉRA ═══ -->
+        <section id="kariera" class="relative py-12 lg:py-28 bg-industry-navy overflow-hidden">
+            <div
+                class="blob"
+                style="
+                    width: 700px;
+                    height: 700px;
+                    top: -200px;
+                    right: -200px;
+                    background: rgba(181, 168, 227, 0.12);
+                "
+            ></div>
+            <div
+                class="blob"
+                style="
+                    width: 700px;
+                    height: 700px;
+                    bottom: -200px;
+                    left: -200px;
+                    background: rgba(181, 168, 227, 0.12);
+                "
+            ></div>
+            <div class="relative container">
+                <div class="grid lg:grid-cols-2 lg:gap-32 gap-16 items-start">
+                    <div>
+                        <h2
+                            class="text-sm text-tech-lila uppercase mb-4"
+                            data-aos="fade-in"
+                            data-aos-delay="0"
+                        >
+                            Kariéra
+                        </h2>
+                        <h3
+                            class="text-white font-bold leading-tight"
+                            data-aos="fade-in"
+                            data-aos-delay="200"
+                        >
+                            Pojďte stavět<br /><span class="text-tech-lila">s námi</span>
+                        </h3>
+                        <p class="my-6 text-white/60" data-aos="fade-in" data-aos-delay="400">
+                            Hledáme lidi, kteří chtějí pracovat s moderními technologiemi a nejsou
+                            spokojeni s průměrem. Nabízíme stabilní zázemí a férové ohodnocení.
+                        </p>
+                        <div
+                            class="space-y-3 text-white/60"
+                            data-aos="fade-in"
+                            data-aos-delay="600"
+                        >
+                            <div class="flex items-center gap-3 text-xl">
+                                <div class="w-2 h-2 rounded-full shrink-0 bg-tech-lila"></div>
+                                Moderní stroje a technologie
+                            </div>
+                            <div class="flex items-center gap-3 text-xl">
+                                <div class="w-2 h-2 rounded-full shrink-0 bg-tech-lila"></div>
+                                Stabilní a rostoucí firma
+                            </div>
+                            <div class="flex items-center gap-3 text-xl">
+                                <div class="w-2 h-2 rounded-full shrink-0 bg-tech-lila"></div>
+                                Přátelský kolektiv
+                            </div>
+                            <div class="flex items-center gap-3 text-xl">
+                                <div class="w-2 h-2 rounded-full shrink-0 bg-tech-lila"></div>
+                                Benefity a prémie
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <p
+                            class="text-xl font-bold mb-6 uppercase text-white"
+                            data-aos="fade-in"
+                            data-aos-delay="700"
+                        >
+                            Otevřené pozice
+                        </p>
+                        <div class="career-card" data-aos="fade-in" data-aos-delay="750">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <p class="font-semibold text-base text-white mb-1">
+                                        Svářeč MIG/MAG, TIG
+                                    </p>
+                                    <p class="text-sm text-white/60">
+                                        Výroba · Plný úvazek · Dobřív
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="career-card" data-aos="fade-in" data-aos-delay="800">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <p
+                                        class="font-semibold text-base text-white mb-1"
+                                        style="font-family: 'Work Sans', sans-serif"
+                                    >
+                                        Obsluha laserového stroje
+                                    </p>
+                                    <p class="text-sm text-white/60">
+                                        Výroba · Plný úvazek · Dobřív
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="career-card" data-aos="fade-in" data-aos-delay="850">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <p
+                                        class="font-semibold text-base text-white mb-1"
+                                        style="font-family: 'Work Sans', sans-serif"
+                                    >
+                                        Technolog / Konstruktér
+                                    </p>
+                                    <p class="text-sm text-white/60">
+                                        Technika · Plný úvazek · Dobřív
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="career-card" data-aos="fade-in" data-aos-delay="900">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <p
+                                        class="font-semibold text-base text-white mb-1"
+                                        style="font-family: 'Work Sans', sans-serif"
+                                    >
+                                        Zámečník
+                                    </p>
+                                    <p class="text-sm text-white/60">
+                                        Výroba · Plný úvazek · Dobřív
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex justify-center items-center mt-8"
+                            data-aos="fade-in"
+                            data-aos-delay="950"
+                        >
+                            <a href="mailto:info@weldera.cz" class="btn-outline inline-flex">
+                                Zaslat přihlášku
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ CLAIM BANNER ═══ -->
+        <section class="relative py-12 lg:py-28 overflow-hidden bg-tech-lila">
+            <div class="relative z-10 container text-center">
+                <svg
+                    class="mx-auto mb-8 w-20 h-20 fill-industry-navy"
+                    viewBox="0 0 246.78 205.38"
+                    data-aos="fade-in"
+                    data-aos-delay="0"
+                >
+                    <polygon
+                        points="151.08 2.02 56.48 96.62 56.48 0 23.98 0 23.98 96.62 0.97 119.63 23.98 142.45 56.48 109.77 56.48 189.31 88.98 189.31 88.98 109.77 183.58 204.38 206.59 181.4 112.99 86.79 246.78 86.79 246.78 54.46 112.99 54.46 151.08 2.02"
+                    />
+                </svg>
+                <h3 class="text-industry-navy text-5xl lg:text-6xl font-bold leading-tight">
+                    <span data-aos="fade-in" data-aos-delay="100">Preciznost.</span><br />
+                    <span data-aos="fade-in" data-aos-delay="200">Poctivost.</span><br />
+                    <span data-aos="fade-in" data-aos-delay="300">Profesionalita.</span>
+                </h3>
+            </div>
+        </section>
+
+        <!-- ═══ KONTAKT ═══ -->
+        <section id="kontakt" class="bg-teal relative py-12 lg:py-28 overflow-hidden">
+            <div class="container">
+                <div class="grid lg:grid-cols-2 lg:gap-32 gap-16">
+                    <div>
+                        <h2
+                            class="text-sm text-tech-lila uppercase mb-4"
+                            data-aos="fade-in"
+                            data-aos-delay="0"
+                        >
+                            Kontakt
+                        </h2>
+                        <h3
+                            class="text-white font-bold leading-tight"
+                            data-aos="fade-in"
+                            data-aos-delay="200"
+                        >
+                            Pojďme si<br /><span class="text-tech-lila">promluvit</span>
+                        </h3>
+                        <p class="my-6 text-white/60" data-aos="fade-in" data-aos-delay="400">
+                            Rádi si promluvíme o vašem projektu. Nezávazná konzultace je zdarma.
+                        </p>
+                        <div
+                            class="space-y-6 text-white/60"
+                            data-aos="fade-in"
+                            data-aos-delay="600"
+                        >
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-sm flex items-center justify-center shrink-0 bg-tech-lila/10"
+                                >
+                                    <svg
+                                        class="w-5 h-5"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="1.5"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                        />
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="1.5"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                        />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-sm text-white">Adresa</p>
+                                    <p class="text-sm text-white/60">
+                                        Dobřív 215, Roudnice nad Labem, 413 01
+                                    </p>
+                                    <p class="text-xs mt-0.5 text-white/60">
+                                        B-M-BETA s.r.o. · IČ: 27352153 · DIČ: CZ27352153
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-sm flex items-center justify-center shrink-0 bg-tech-lila/10"
+                                >
+                                    <svg
+                                        class="w-5 h-5"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="1.5"
+                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                        />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-sm text-white">E-mail</p>
+                                    <a
+                                        href="mailto:info@weldera.cz"
+                                        class="text-sm text-white/60 nav-link"
+                                        >info@weldera.cz</a
+                                    >
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-sm flex items-center justify-center shrink-0 bg-tech-lila/10"
+                                >
+                                    <svg
+                                        class="w-5 h-5"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="1.5"
+                                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                                        />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-sm text-white">Telefon</p>
+                                    <a
+                                        href="tel:+420606476613"
+                                        class="text-sm text-white/60 nav-link"
+                                        >+420 606 476 613</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div
+                            class="rounded-sm p-8 bg-tech-lila/5 border border-tech-lila/15"
+                            data-aos="fade-in"
+                            data-aos-delay="800"
+                        >
+                            <h3 class="text-xl font-bold mb-6 uppercase text-white mb-6">
+                                Nezávazná poptávka
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block mb-2 text-white/60">Jméno</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Jan Novák"
+                                            class="w-full p-2.5 rounded-sm bg-white/5 border border-white/15 text-white/60"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label class="block mb-2 text-white/60">Firma</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Vaše firma s.r.o."
+                                            class="w-full p-2.5 rounded-sm bg-white/5 border border-white/15 text-white/60"
+                                        />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block mb-2 text-white/60">E-mail</label>
+                                    <input
+                                        type="email"
+                                        placeholder="jan@firma.cz"
+                                        class="w-full p-2.5 rounded-sm bg-white/5 border border-white/15 text-white/60"
+                                    />
+                                </div>
+
+                                <div>
+                                    <label class="text-sm block mb-2 text-white/60"
+                                        >Popis projektu</label
+                                    >
+                                    <textarea
+                                        rows="4"
+                                        placeholder="Popište váš projekt, materiály, množství…"
+                                        class="w-full p-2.5 rounded-sm bg-white/5 border border-white/15 text-white/60 resize-none"
+                                    ></textarea>
+                                </div>
+                                <button class="btn-primary w-full justify-center text-sm">
+                                    Odeslat poptávku
+                                    <svg
+                                        class="w-4 h-4"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ FOOTER ═══ -->
+        <footer class="py-12 bg-black">
+            <div class="container">
+                <div class="grid lg:grid-cols-4 gap-10">
+                    <div class="md:col-span-2">
+                        <div class="w-40 mb-4">
+                            <svg class="w-full fill-tech-lila" viewBox="0 0 1500 464.61">
+                                <polygon
+                                    points="271.07 74.41 229.74 171.62 191.2 74.41 147.51 74.41 108.97 171.84 67.64 74.41 26.74 74.41 83.49 200.53 132.31 200.53 169.36 112.74 206.4 200.53 255.23 200.53 311.97 74.41 271.07 74.41"
+                                />
+                                <path
+                                    d="M396.29,72.27c-51.18,0-87.37,18.84-87.37,65.31s37.26,65.1,85.23,65.1,77.95-15.2,86.3-47.32h-36.4c-9.21,12.85-24.63,17.56-49.89,17.56s-43.68-6.64-47.75-26.77h136.19c0-57.39-38.33-73.88-86.3-73.88ZM347.68,122.8c5.78-17.77,23.34-22.7,48.4-22.7,23.13,0,41.11,4.92,47.32,22.7h-95.72Z"
+                                />
+                                <rect x="496.49" y="29.22" width="36.62" height="171.31" />
+                                <path
+                                    d="M688.75,94.11c-13.7-14.35-35.76-21.84-62.96-21.84-40.47,0-75.16,17.13-75.16,65.31s34.69,65.1,75.16,65.1c27.2,0,49.25-7.49,62.96-21.84v19.7h36.62V29.22h-36.62v64.88ZM638,172.06c-32.76,0-50.54-9.64-50.54-34.48s17.77-34.69,50.54-34.69,50.75,9.64,50.75,34.69-17.99,34.48-50.75,34.48Z"
+                                />
+                                <path
+                                    d="M826.64,72.27c-51.18,0-87.37,18.84-87.37,65.31s37.26,65.1,85.22,65.1,77.95-15.2,86.3-47.32h-36.4c-9.21,12.85-24.63,17.56-49.89,17.56s-43.68-6.64-47.75-26.77h136.19c0-57.39-38.33-73.88-86.3-73.88ZM778.03,122.8c5.78-17.77,23.34-22.7,48.4-22.7,23.13,0,41.11,4.92,47.32,22.7h-95.72Z"
+                                />
+                                <path
+                                    d="M967.07,124.94c22.27-17.35,45.83-22.06,66.38-22.06,10.71,0,20.34,1.29,32.34,4.28v-30.62c-8.57-2.14-19.06-4.28-34.05-4.28-23.56,0-45.83,6.64-64.67,23.55v-21.41h-36.62v126.13h36.62v-75.59Z"
+                                />
+                                <path
+                                    d="M1125.09,202.68c29.77,0,54.39-6.85,76.66-17.77v15.63h36.83v-63.6c-.43-47.75-30.4-64.67-83.08-64.67-26.34,0-51.61,4.71-77.3,13.06l13.06,26.77c25.91-7.71,46.04-9.21,62.53-9.21s47.97,1.93,47.97,25.91c-16.49-5.57-36.4-8.99-58.03-8.99-40.04,0-76.02,10.28-76.02,43.04,0,28.48,22.06,39.83,57.39,39.83ZM1148.22,143.79c23.34,0,40.69,3.64,53.53,7.71v9.85c-18.84,8.14-46.25,14.35-66.17,14.35s-31.26-1.07-31.26-14.35,16.49-17.56,43.9-17.56Z"
+                                />
+                                <polygon
+                                    points="1411.08 128.49 1316.48 223.09 1316.48 89.28 1283.98 89.28 1283.98 191.43 1316.29 223.27 1316.48 223.42 1336.85 243.51 1339.49 246.07 1434.09 151.46 1411.08 128.49"
+                                />
+                                <polygon
+                                    points="1473.26 246.07 1339.49 246.07 1316.48 246.07 1306.95 246.07 1293.5 246.07 1283.98 246.07 1260.97 246.07 930.46 246.07 930.46 278.6 1260.97 278.6 1166.37 373.2 1189.38 396.18 1283.98 301.57 1283.98 435.38 1316.48 435.38 1316.48 301.57 1411.08 396.18 1434.09 373.2 1339.49 278.6 1473.26 278.6 1473.26 246.07"
+                                />
+                            </svg>
+                        </div>
+                        <p class="text-sm max-w-xs mb-4 text-white/60">
+                            Česká strojírenská firma. Laserové řezání, ohýbání, svařování a výroba
+                            ocelových konstrukcí.
+                        </p>
+                        <p class="font-semibold text-xs text-tech-lila">
+                            Preciznost. Poctivost. Profesionalita.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase mb-4 text-white/30 font-display">Navigace</p>
+                        <div class="space-y-2.5">
+                            <a href="#sluzby" class="block w-fit nav-link text-sm text-white/60"
+                                >Služby</a
+                            >
+                            <a href="#o-nas" class="block w-fit nav-link text-sm text-white/60"
+                                >O nás</a
+                            >
+                            <a href="#kariera" class="block w-fit nav-link text-sm text-white/60"
+                                >Kariéra</a
+                            >
+                            <a href="#kontakt" class="block w-fit nav-link text-sm text-white/60"
+                                >Kontakt</a
+                            >
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase mb-4 text-white/30 font-display">Kontakt</p>
+                        <div class="space-y-2.5">
+                            <p class="text-sm text-white/60">
+                                Dobřív 215<br />Roudnice nad Labem, 413 01
+                            </p>
+                            <a
+                                href="mailto:info@weldera.cz"
+                                class="block w-fit text-sm text-white/60 nav-link"
+                                >info@weldera.cz</a
+                            >
+                            <a
+                                href="tel:+420606476613"
+                                class="block w-fit text-sm text-white/60 nav-link"
+                                >+420 606 476 613</a
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-8 flex flex-wrap items-center justify-between gap-4">
+                    <p class="text-xs text-white/25">
+                        © 2025 B-M-BETA s.r.o. — Weldera. Všechna práva vyhrazena.
+                    </p>
+                    <div class="flex items-center gap-6">
+                        <a href="#" class="text-xs text-white/25 nav-link"
+                            >Ochrana osobních údajů</a
+                        >
+                        <a href="#" class="text-xs text-white/25 nav-link">Obchodní podmínky</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
         <!-- AOS init -->
         <script src="js/aos.js"></script>
-        <script>
-            AOS.init({
-                duration: 700,
-                once: true,
-            });
-        </script>
+        <script src="js/swiper.js"></script>
+        <script src="js/main.js"></script>
 
         <!-- Alpine.js (musí být poslední) -->
         <script defer src="js/alpine.min.js"></script>
